@@ -1,9 +1,8 @@
-from django.http import HttpResponse
-from django.template import Template, Context, loader
-from datetime import datetime
-from django.shortcuts import render
-from inicio.models import vestido
 
+from datetime import datetime
+from django.shortcuts import render, redirect
+from inicio.models import vestido
+from inicio.forms import CrearVestidoForm
 def inicio(request):
     return render(request, 'inicio.html')
     # return HttpResponse('<h1>Soy la pantalla de inicio </h1>')
@@ -37,13 +36,38 @@ def segundo_template(request):
     
     #return HttpResponse(render_template)
     
-def guardar_vestido(request, color, escote, mangas):
+def crear_vestido(request, color, escote, mangas):
     Vestido = vestido(color = color, escote = escote, mangas = mangas)
     Vestido.save()
-    return render(request, 'vestido.html', {'vestido': Vestido})
+    
+    return render(request, 'vestido.html', {'vestido': vestido})
+
+def crear_vestido(request):
+    
+    #print ('Request', request)
+    #print ('GET', request.GET)
+    #print ('POST', request.POST)
+    
+    formulario = CrearVestidoForm()
+    
+    if request.method == 'POST':
+      formulario = CrearVestidoForm(request.POST)
+      if formulario.is_valid():
+          data=formulario.cleaned_data
+          Vestido = vestido(color = data.get('color'), escote = data.get('escote'), mangas = data.get('mangas'))
+          Vestido.save()
+          return redirect('inicio: buscar_modelo')
+        
+
+  
+    return  render (request,'vestido.html', {'form': 'formulario'})
+    
+def buscar_modelo(request):
+    return render(request, 'buscar_modelo.html', {'vestido': ''})
+    
    
     
         
 
 
-# Create your views here.
+

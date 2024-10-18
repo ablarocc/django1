@@ -1,4 +1,15 @@
 {% extends "base.html" %}
-{% block h1_head %}
-New Season
-{% endblock h1_head  %}
+{%load static%}
+{% block h1_head %} Crear vestido {% endblock h1_head  %}
+{% block main %}
+
+<form action = {% url "crear_vestido" %} method ="POST">
+    {% csrf_token %}
+    
+
+    {{form}}
+    <input type="submit" value="Enviar">
+
+</form>
+{% endblock main  %}
+

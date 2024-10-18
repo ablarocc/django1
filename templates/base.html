@@ -27,7 +27,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href={%url "inicio" %}>Home</a></li>
-                        <li class="nav-item dropdown">
+                    <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href={% url "Todos_los_vestidos" %}>Todos</a></li>
@@ -37,7 +37,9 @@
                                 <li><a class="dropdown-item" href="#!">Modelos a medida</a></li>
                             </ul>
                         </li>
-                    <ul class="nav-item"><a class="nav-link activw" href={% url "nosotros" %}>Quienes somos</a></ul>
+                <ul class="nav-item"><a class="nav-link active"  href={%url "vestidos" %}>Crear vestido</a></ul>
+                <ul class="nav-item"><a class="nav-link active"  href={%url "buscar-modelo" %}>Buscar vestido</a></ul>
+                <ul class="nav-item"><a class="nav-link active" href={% url "nosotros" %}>Quienes somos</a></ul>
                     </ul>
                     <form class="d-flex">
                         <button class="btn btn-outline-dark" type="submit">
