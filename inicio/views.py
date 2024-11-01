@@ -2,7 +2,7 @@
 from datetime import datetime
 from django.shortcuts import render, redirect
 from inicio.models import vestido
-from inicio.forms import CrearVestidoForm
+from inicio.forms import CrearVestidoForm, BuscarModeloForm
 def inicio(request):
     return render(request, 'inicio.html')
     # return HttpResponse('<h1>Soy la pantalla de inicio </h1>')
@@ -56,16 +56,20 @@ def crear_vestido(request):
           data=formulario.cleaned_data
           Vestido = vestido(color = data.get('color'), escote = data.get('escote'), mangas = data.get('mangas'))
           Vestido.save()
-          return redirect('inicio: buscar_modelo')
-        
-
-  
-    return  render (request,'vestido.html', {'form': 'formulario'})
+          return redirect('buscar_modelo.html')
+    return  render (request,'vestido.html', {'form': formulario})
     
 def buscar_modelo(request):
-    return render(request, 'buscar_modelo.html', {'vestido': ''})
+    formulario = BuscarModeloForm(request.POST)
+    if formulario.is_valid():
+        color = formulario.cleaned_data.get('color')
+        escote = formulario.cleaned_data.get('escote')
+        vestidos = vestido.objects.filter(color__icontains=color, escote__icontains=escote)
+    return render(request, 'buscar_modelo.html', {'vestidos': vestidos,'form' : formulario})
     
-   
+def ver_modelo(request, id):
+    vestido = vestido.object.get(id=id)
+    return render(request, 'ver_modelo.html', {'vestido': vestido})
     
         
 

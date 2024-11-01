@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 {%load static%}
-{% block head %} Buscar Modelo {% endblock head  %}
+{% block title_head %} 
+Buscar Modelo 
+{% endblock title_head%}
+{% block h1_header %} Buscar Modelo {% endblock h1_header %}
 {% block main %}
 
-<form action = {% url "buscar_modelo" %} ></form>
+<form action = {% url "inicio:buscar_modelo" %}>
+    {{form}}
+    <input type ="submit">
+</form>
 
 {% endblock main  %}

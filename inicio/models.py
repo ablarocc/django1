@@ -6,5 +6,5 @@ class vestido(models.Model):
     mangas = models.CharField(max_length=15)
     
     def __str__(self):
-        return f'{self.color} {self.escote}'
+        return f'{self.color} {self.escote} {self.mangas} '
     

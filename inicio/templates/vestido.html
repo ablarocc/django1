@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 {%load static%}
-{% block h1_head %} Crear vestido {% endblock h1_head  %}
+{% block title_head %} 
+Crear vestido 
+{% endblock title_head  %}
+{% block h1_head %} Crear Vestido {% endblock h1_head  %}
 {% block main %}
 
-<form action = {% url "crear_vestido" %} method ="POST">
+<form action = {% url "inicio:buscar_modelo" %} method ="POST">
     {% csrf_token %}
-    
-
     {{form}}
+
     <input type="submit" value="Enviar">
 
 </form>

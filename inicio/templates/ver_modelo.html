@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title_head %} 
+Ver Vestido
+{% endblock title_head  %}
+{% block h1_head %} {{vestido}}{% endblock h1_head  %}
+{% block main %}
+<ul>
+    <li> color: {{vestido.color}}</li>
+    <li> escote: {{vestido.escote}}</li>
+    <li> mangas: {{vestio.mangas}}</li>
+</ul>
+
+{% endblock main  %}
