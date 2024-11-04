@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{%load static%}
+{% block title_head %} 
+Editar Vestido 
+{% endblock title_head  %}
+{% block h1_head %} Editar Vestido {% endblock h1_head  %}
+{% block main %}
+
+<form action = {% url "inicio:editar_modelo" modelo.id %} method ="POST">
+    {% csrf_token %}
+    {{form}}
+
+    <input type="submit" value="Enviar">
+
+</form>
+{% endblock main  %}

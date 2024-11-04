@@ -1,9 +1,12 @@
 from django import forms
-
-class CrearVestidoForm(forms.Form):
+    
+class VestidoFormularioBase(forms.Form):
     color = forms.CharField(max_length=20)
     escote = forms.CharField(max_length=25)
-    mangas = forms.CharField(max_length=15)
+    mangas = forms.CharField(max_length=15)    
+    
+class CrearVestidoForm(VestidoFormularioBase):...  
+class EditarVestidoForm(VestidoFormularioBase):...
     
 class BuscarModeloForm(forms.Form):
     color = forms.CharField(max_length=20 , required=False)

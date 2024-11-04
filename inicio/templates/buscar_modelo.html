@@ -11,4 +11,15 @@ Buscar Modelo
     <input type ="submit">
 </form>
 
+{% if vestido %}
+<ul>
+    {% for vestido in Vestido %}
+    <li>{{vestido}} | <a href={% url "inicio:ver_modelo"  vestido.id %}> Ver mas</a> | <a href={% url "inicio:eliminar_modelo"  vestido.id %}>Eliminar</a> | <a href={% url "inicio:editar_modelo"  vestido.id %}>Editar</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay vestidos ingresados</p>
+{%endif%}
+
+
 {% endblock main  %}

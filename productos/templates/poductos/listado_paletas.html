@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{%load static%}
+{% block title_head %} 
+Listado Paletas
+{% endblock title_head%}
+{% block h1_header %} Listado Paletas{% endblock h1_header %}
+{% block main %}
+
+<a class="navbar-brand" href={% url "productos:crear_paleta"%}> Crear Paletas</a>
+
+{% if paletas %}
+<ul>
+    {% for paleta in paletas %}
+    <li>{{paletas}} 
+        | <a href={% url "inicio:ver_paleta"  paleta.id %}> Ver mas</a> 
+        | <a href={% url "inicio:eliminar_paleta"  paleta.id %}>Eliminar</a> 
+        | <a href={% url "inicio:editar_paleta"  paleta.id %}>Editar</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay paleta ingresada</p>
+{%endif%}
+
+
+{% endblock main  %}

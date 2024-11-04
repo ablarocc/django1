@@ -2,7 +2,7 @@
 from datetime import datetime
 from django.shortcuts import render, redirect
 from inicio.models import vestido
-from inicio.forms import CrearVestidoForm, BuscarModeloForm
+from inicio.forms import CrearVestidoForm, BuscarModeloForm,EditarVestidoForm
 def inicio(request):
     return render(request, 'inicio.html')
     # return HttpResponse('<h1>Soy la pantalla de inicio </h1>')
@@ -68,10 +68,30 @@ def buscar_modelo(request):
     return render(request, 'buscar_modelo.html', {'vestidos': vestidos,'form' : formulario})
     
 def ver_modelo(request, id):
-    vestido = vestido.object.get(id=id)
-    return render(request, 'ver_modelo.html', {'vestido': vestido})
+    vestido = vestido.objects.get(id=id)
+    return render(request, 'inicio/ver_modelo.html', {'vestido': vestido})
     
-        
+def eliminar_modelo(request, id):
+    vestido = vestido.objects.get(id=id)
+    vestido.delete()
+    return redirect('inicio:buscar_modelo')
 
+def editar_modelo(request, id):
+    vestido = vestido.objects.get(id=id)
+
+    formulario = EditarVestidoForm(initial={'color': vestido.color,'escote': vestido.escote,'mangas': vestido.mangas})
+    
+    if request.method == 'POST':
+        formulario = EditarVestidoForm(request.POST)
+        if formulario.is_valid():
+            vestido.color = formulario.cleaned_data.get('color')
+            vestido.escote = formulario.cleaned_data.get('escote')
+            vestido.mangas = formulario.cleaned_data.get('mangas')
+            vestido.save()
+            return redirect('inicio: buscar_modelo')
+    return render(request, 'inicio/editar_modeo.html', {'vestido': vestido,'form': formulario})    
+        
+    
+    
 
 
